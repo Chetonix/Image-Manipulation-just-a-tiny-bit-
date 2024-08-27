@@ -1,6 +1,6 @@
 from PIL import Image
 
-def remove_red(image):
+def apply_gray(image):
 
     # Convert image to RGB if it's not in that mode
     if image.mode != 'RGB':
@@ -14,14 +14,15 @@ def remove_red(image):
         for px in range(width):
             #r, g, b = image.getpixel((px, py))
             r, g, b = pixels[px, py]
-            tr = 0
-            tg = g
-            tb = b
+            tr = r+g+b//3
+            tg = r+g+b//3
+            tb = r+g+b//3
+
             pixels[px, py] = (tr, tg, tb)
 
     return image
 
 # Example usage
 image = Image.open("Che and Jay.png")
-nor_image = remove_red(image)
-nor_image.save("Che and Jay_without_red.jpg")
+gray_image = apply_gray(image)
+gray_image.save("Che and Jay_gray_1.jpg")
